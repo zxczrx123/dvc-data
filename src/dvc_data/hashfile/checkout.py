@@ -264,11 +264,12 @@ def checkout(
     failed = []
     if not obj:
         if not quiet:
-            logger.warning(
+            logger.error(
                 "No file hash info found for '%s'. It won't be created.",
                 path,
             )
         failed.append(path)
+        raise CheckoutError(failed)
 
     try:
         _checkout(
